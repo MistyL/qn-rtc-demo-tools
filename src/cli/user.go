@@ -22,6 +22,7 @@ var supportedUserSubCmds = map[string]func(string, string){
 	"register": CreateUser,
 	"delete":   DeleteUser,
 	"update":   UpdateUserInfo,
+	"login":    Login,
 }
 
 type RequestBody struct {
@@ -67,48 +68,48 @@ func UserInfo(cmd, subCmd string) {
 	fmt.Println(string(body))
 }
 
-// func Login(cmd, subCmd string) {
-// 	flagSet := flag.NewFlagSet(subCmd, flag.ExitOnError)
-// 	flagSet.Usage = func() {
-// 		CmdHelp(cmd, subCmd)
-// 	}
+func Login(cmd, subCmd string) {
+	flagSet := flag.NewFlagSet(subCmd, flag.ExitOnError)
+	flagSet.Usage = func() {
+		CmdHelp(cmd, subCmd)
+	}
 
-// 	var user string
-// 	var password string
+	var user string
+	var password string
 
-// 	flagSet.StringVar(&user, "u", "", "user name")
-// 	flagSet.StringVar(&password, "p", "", "password")
+	flagSet.StringVar(&user, "u", "", "user name")
+	flagSet.StringVar(&password, "p", "", "password")
 
-// 	flagSet.Parse(os.Args[3:])
-// 	if user == "" || password == "" {
-// 		fmt.Println("Invalid params.")
-// 		return
-// 	}
-// 	user = strings.TrimSpace(user)
-// 	password = strings.TrimSpace(password)
+	flagSet.Parse(os.Args[3:])
+	if user == "" || password == "" {
+		fmt.Println("Invalid params.")
+		return
+	}
+	user = strings.TrimSpace(user)
+	password = strings.TrimSpace(password)
 
-// 	url := fmt.Sprintf("%s/rtc/login", BASE_URL)
-// 	var reqBody RequestBody
-// 	if user != "" {
-// 		reqBody.Name = user
-// 	}
-// 	if password != "" {
-// 		reqBody.Password = password
-// 	}
-// 	req, _ := json.Marshal(reqBody)
-// 	reqbody := bytes.NewBuffer([]byte(req))
-// 	// fmt.Println(string(req))
-// 	request, _ := http.NewRequest("POST", url, reqbody)
-// 	request.Header.Set("Content-Type", "application/json")
-// 	response, err := http.DefaultClient.Do(request)
-// 	if err != nil {
-// 		fmt.Printf("login failur, %s\n", err.Error())
-// 		return
-// 	}
-// 	defer response.Body.Close()
-// 	body, _ := ioutil.ReadAll(response.Body)
-// 	fmt.Println(string(body))
-// }
+	url := fmt.Sprintf("%s/pili/login", BASE_URL)
+	var reqBody RequestBody
+	if user != "" {
+		reqBody.Name = user
+	}
+	if password != "" {
+		reqBody.Password = password
+	}
+	req, _ := json.Marshal(reqBody)
+	reqbody := bytes.NewBuffer([]byte(req))
+	// fmt.Println(string(req))
+	request, _ := http.NewRequest("POST", url, reqbody)
+	request.Header.Set("Content-Type", "application/json")
+	response, err := http.DefaultClient.Do(request)
+	if err != nil {
+		fmt.Printf("login failur, %s\n", err.Error())
+		return
+	}
+	defer response.Body.Close()
+	body, _ := ioutil.ReadAll(response.Body)
+	fmt.Println(string(body))
+}
 
 func CreateUser(cmd, subCmd string) {
 	flagSet := flag.NewFlagSet(subCmd, flag.ExitOnError)

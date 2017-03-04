@@ -4,8 +4,8 @@ import (
 	"fmt"
 )
 
-const VERISON = "1.0.0"
-const BASE_URL = "http://115.231.183.102"
+const VERISON = "1.0.1"
+const BASE_URL = "https://api.qiniudemo.com"
 
 var roomCmdOrder = []string{"query", "create", "delete", "token"}
 
