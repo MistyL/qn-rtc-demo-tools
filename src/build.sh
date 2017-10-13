@@ -1,3 +1,3 @@
 DIR=$(cd ../; pwd)
 export GOPATH=$GOPATH:$DIR
-go build main.go
+go build -o "qlink" main.go

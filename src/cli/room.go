@@ -136,7 +136,7 @@ func GetRoomToken(cmd, subCmd string) {
 	user = strings.TrimSpace(user)
 	room = strings.TrimSpace(room)
 
-	url := fmt.Sprintf("%s/pili/room/%s/user/%s/token", BASE_URL, room, user)
+	url := fmt.Sprintf("%s/pili/room/%s/user/%s/token/", BASE_URL, room, user)
 	request, _ := http.NewRequest("POST", url, nil)
 	response, err := http.DefaultClient.Do(request)
 	if err != nil {
